@@ -1,14 +1,34 @@
 let formularioCampus = document.querySelector("#formularioCampus");
 let formularioCamper = document.querySelector("#formularioCamper");
 let selectOption = document.querySelector("[name='selectOption']");
+
 let campus = {};
 
 formularioCampus.addEventListener("submit", (e) =>{
     e.preventDefault(); //preventDefault sirve para que no me redireccione la propiedad action de nuestro form
     let data = Object.fromEntries(new FormData(e.target)); //este codigo me obtiene todos los datos ingresados por el usuario en el formulario
-    campus[`${data.nombreSede}`] = {Camper:[], Trainer:[]};
-    listSedes()
-    formularioCampus.reset()
+
+    if(data.nombreSede != ""){
+        if(Object.entries(campus).length != 0){
+            for(let[val,id] of Object.entries(campus)){
+                if(data.nombreSede == val){
+                    alert(`${data.nombreSede} ya ha sido agregado`)
+                }else{
+                    campus[`${data.nombreSede}`] = {Camper:[], Trainer:[]};
+                    listSedes()
+                    formularioCampus.reset()
+                }
+        }
+            
+        }else{
+            campus[`${data.nombreSede}`] = {Camper:[], Trainer:[]};
+            listSedes()
+            formularioCampus.reset()
+        }
+    }else{
+        alert(`Ingrese alguna sede`)
+    }
+    console.log(campus)
 } )
 
 let listSedes = () => {
@@ -53,13 +73,44 @@ selectOption.addEventListener('change', (event) => {
         <input type="time" name="horarioIngles${event.target.value}" placeholder=""> <br><br>
         <label for="horarioSer${event.target.value}">Horario clase ser del ${event.target.value}:</label>
         <input type="time" name="horarioSer${event.target.value}" placeholder=""> <br><br>
+        <label for="Nivel">Nivel actual del camper</label>
+        <select name="nivel">
+            <option value="">Elegir</option>
+            <option value="Avanzado">Avanzado</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Basico">Basico</option>
+        </select> <br><br>
+        <div class="contNivel" style="margin-left: 20px;""></div>
+        <label for="direccion">Direccion:</label>
+        <input type="text" name="direccion" placeholder="cra12 #34-56" > <br><br>
+        <label for="transporte">Medio de transporte</label>
+        <input type="text" name="transporte" placeholder="Medio de transporte"> <br><br>
         <input type="submit" value="Guardar">
         `)
+        let nivel = document.querySelector("[name='nivel']");
+        nivel.addEventListener('change', (event) => {
+            let contNivel = document.querySelector(".contNivel")
+            if(event.target.value != ""){
+                contNivel.insertAdjacentHTML("beforeend", `
+                    <label for="preRequisito">Pre-requisito:</label>
+                    <input type="text" name="preRequisito" placeholder="Pre-Requisito"><br><br>
+                    <label for="tecnologias">A que tecnologia pertenece:</label>
+                    <input type="text" name="tecnologias" placeholder="Tecnologia"><br><br>
+                    <select name="tipoTecnologia">
+                        <option value="">Elegir</option>
+                        <option value="electiva">Electiva</option>
+                        <option value="obligatoria">Obligatoria</option>
+                    </select><br><br>
+                    `)
+            }
+            })
     }else{
         cont_form.insertAdjacentHTML("beforeend", `
         <input type="submit" value="Guardar">`)
     }
 });
+
+
 
 formularioCamper.addEventListener("submit", (e) =>{
     e.preventDefault();
@@ -68,6 +119,7 @@ formularioCamper.addEventListener("submit", (e) =>{
     let option = data.selectOption
     delete data.selectSede;
     delete data.selectOption;
+
     campus[`${sede}`][`${option}`].unshift(data);
     console.log(campus);
     formularioCamper.reset()
