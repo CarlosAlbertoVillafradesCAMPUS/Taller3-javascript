@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./main.js" defer></script>
+</head>
+<body>
+    <fieldset>
+        <legend>Datos de contacto</legend>
+        <form id="formularioCampus">
+            <label for="nombreSede">Ingrese la sede</label>
+            <input type="text" name="nombreSede" placeholder="Nombre Sede"> <br><br>
+            <input type="submit" value="Guardar">
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Datos de los Campers o Trainers </legend>
+        <form id="formularioCamper">
+            <label for="selectSede">Seleccione la sede:</label>
+            <select name="selectSede"></select> <br><br>
+            <label for="selectOption">Camper o Trainer:</label>
+            <select name="selectOption" disabled>
+                <option value="">Elegir</option>
+                <option value="Camper">Camper</option>
+                <option value="Trainer">Trainer</option>
+            </select> <br><br>
+            <div id="cont_form">
+
+            </div>
+        </form>
+    </fieldset>
+</body>
+</html>
