@@ -1,0 +1,25 @@
+.container-principal{
+    background-color: #493A80;
+}
+.sectio1 {
+    background-color:rgba(0, 0, 0, 0.3);
+}
+.fieldset1{
+    border-bottom: 0.2rem dashed white;
+}
+
+.btn{
+    background-color: #72BAEC; 
+    color: white
+}
+
+.btn:hover{
+    background-color: #3b617c;
+}
+option{
+    background-color: #72BAEC; 
+    color: white
+}
+option:hover{
+    background-color: #3b617c; 
+}
