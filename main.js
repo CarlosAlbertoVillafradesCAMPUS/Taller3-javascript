@@ -12,23 +12,24 @@ formularioCampus.addEventListener("submit", (e) =>{
         if(Object.entries(campus).length != 0){
             for(let[val,id] of Object.entries(campus)){
                 if(data.nombreSede == val){
-                    alert(`${data.nombreSede} ya ha sido agregado`)
+                    alert(`La sede en ${data.nombreSede} ya ha sido agregado`)
                 }else{
-                    campus[`${data.nombreSede}`] = {Camper:[], Trainer:[]};
+                    campus[`${data.nombreSede}`] = {Direccion: data.direccion, Telefono: data.telefono, Camper:[], Trainer:[]};
                     listSedes()
+                    console.log(campus)
                     formularioCampus.reset()
                 }
         }
             
         }else{
-            campus[`${data.nombreSede}`] = {Camper:[], Trainer:[]};
+            campus[`${data.nombreSede}`] = {Direccion:data.direccion, Telefono:data.telefono, Camper:[], Trainer:[]};
             listSedes()
+            console.log(campus)
             formularioCampus.reset()
         }
     }else{
         alert(`Ingrese alguna sede`)
     }
-    console.log(campus)
 } )
 
 let listSedes = () => {
@@ -54,7 +55,7 @@ selectOption.addEventListener('change', (event) => {
     <label for="telefono${event.target.value}">Telefono del ${event.target.value}:</label>
     <input type="tel" name="telefono${event.target.value}" placeholder="1234567890"> <br><br>
     <label for="email${event.target.value}">Email del ${event.target.value}:</label>
-    <input type="email" name="email${event.target.value}" placeholder="Email${event.target.value}@****.com"> <br><br>
+    <input type="email" name="email${event.target.value}" placeholder="${event.target.value}@example.com"> <br><br>
     <label for="team${event.target.value}">Team del ${event.target.value}:</label>
     <input type="number" name="team${event.target.value}" placeholder="Team ${event.target.value}"> <br><br>
     <label for="salon${event.target.value}">Salon del ${event.target.value}:</label>
