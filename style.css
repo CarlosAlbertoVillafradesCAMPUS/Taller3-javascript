@@ -1,8 +1,30 @@
+@font-face{
+    font-family: 'Campus';
+    src: url("./Campus\ A.ttf");
+}
+
 .container-principal{
     background-color: #493A80;
 }
 .sectio1 {
     background-color:rgba(0, 0, 0, 0.3);
+}
+.animation{
+    border: 4px #72BAEC dashed;
+}
+@keyframes girar {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+h1{
+    font-size: 5em;
+    padding: 1px;
+    font-family: "Campus";
+    color: #72BAEC;
 }
 .fieldset1{
     border-bottom: 0.2rem dashed white;
@@ -22,4 +44,12 @@ option{
 }
 option:hover{
     background-color: #3b617c; 
+}
+@media (max-width: 680px) {
+    .cont-input{
+        width: 100% !important;
+    }
+    .form-select{
+        width: 100% !important;
+    }
 }
