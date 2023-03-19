@@ -10,12 +10,12 @@ formularioCampus.addEventListener("submit", (e) => {
    data.nombreSede = data.nombreSede.toUpperCase()
   if (data.nombreSede != "") {
     if (Object.entries(campus).length != 0) {
-        console.log(Object.entries(campus))
       for (let [val, id] of Object.entries(campus)) {
         if(data.nombreSede === val) {
           alert(`Error!!!!! La sede en ${data.nombreSede} ya ha sido agregado`);
+          formularioCampus.reset();
           break
-        } else {
+        }else {
           campus[`${data.nombreSede}`] = {
             Direccion: data.direccion,
             Telefono: data.telefono,
@@ -205,13 +205,46 @@ selectOption.addEventListener("change", (event) => {
       cont_formulario_camper.insertAdjacentHTML(
         "beforeend",
         `
-            <div class="col-12 d-flex justify-content-center ">
-                <div class="cont-input w-50 d-flex flex-column text-center">
-                    <label class="mb-1" for="horarioClase${event.target.value}">Horario clase del ${event.target.value}:</label>
-                    <input class="ps-2 form-control text-center" type="time" name="horarioClase${event.target.value}" placeholder=""> 
+        <div class="col-12 col-lg-6 d-flex justify-content-center ">
+                <div class="cont-input w-75 d-flex flex-column text-center">
+                    <label class="mb-1" for="Tecnologia">Tecnologia</label>
+                    <select class="ps-2 form-select" name="Tecnologia">
+                        <option value="">Elegir</option>
+                        <option value="Web">Web</option>
+                        <option value="Movil">Movil</option>
+                        <option value="Videojuegos">Videojuegos</option>
+                    </select>
                 </div>
             </div>
-            <div class="col-12 mt-4 mt-lg-4 pb-4">
+
+            <div class="col-12 col-lg-6 d-flex justify-content-center ">
+                <div class="cont-input w-75 d-flex flex-column text-center">
+                    <label class="mb-1" for="Modalidad">Modalidad</label>
+                    <select class="ps-2 form-select" name="Modalidad">
+                        <option value="">Elegir</option>
+                        <option value="Presencial">Presencial</option>
+                        <option value="Virtual">Virtual</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-6 d-flex justify-content-center ">
+                <div class="cont-input w-75 d-flex flex-column text-center">
+                    <label class="mb-1" for="Sandbox">Sandbox</label>
+                    <select class="ps-2 form-select" name="Sandbox">
+                        <option value="">Elegir</option>
+                        <option value="Aplica">Aplica</option>
+                        <option value="No-Aplica">No Aplica</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 d-flex justify-content-center ">
+                <div class="cont-input w-75 d-flex flex-column text-center">
+                    <label class="mb-1" for="horarioClaseTrainer">Horario clase del Trainer:</label>
+                    <input class="ps-2 form-control text-center" type="time" name="horarioClaseTrainer" placeholder=""> 
+                </div>
+            </div>
+            <div class="col-12 mt-5 mt-lg-5 pb-4">
                 <input class="btn px-5 py-1 fs-5" type="submit" value="Guardar">
             </div>`
       );
@@ -224,19 +257,32 @@ formularioCamper.addEventListener("submit", (e) => {
   let data = Object.fromEntries(new FormData(e.target));
   let sede = data.selectSede;
   let option = data.selectOption;
+  
+ 
+  for (let [id, val] of Object.entries(data)) {
+    if(val != ""){
+        if(id  === Object.keys(data)[(Object.keys(data).length) - 1]){
+            if (data.nivel) {
+                data.nivel={name: data.nivel, preRequisito:data.preRequisito, tecnologia:data.tecnologias, tipoTecnologia:data.tipoTecnologia};
+                delete data.preRequisito
+                delete data.tecnologias
+                delete data.tipoTecnologia
+              }
+            
+              delete data.selectSede;
+              delete data.selectOption;
+            
+              campus[`${sede}`][`${option}`].unshift(data);
+              alert(`${option.toUpperCase()} Agregado con exito`)
+              console.log(campus);
+              formularioCamper.reset();
+        }
+        
+    } else {
+        alert("ERROR!!!! falta algun dato por agregar");
+        break
 
-  if (data.nivel) {
-    data.nivel={name: data.nivel, preRequisito:data.preRequisito, tecnologia:data.tecnologias, tipoTecnologia:data.tipoTecnologia};
-    delete data.preRequisito
-    delete data.tecnologias
-    delete data.tipoTecnologia
+    }
   }
-
-  delete data.selectSede;
-  delete data.selectOption;
-
-  campus[`${sede}`][`${option}`].unshift(data);
-  alert(`${option.toUpperCase()} Agregado con exito`)
-  console.log(campus);
-  formularioCamper.reset();
+ 
 });

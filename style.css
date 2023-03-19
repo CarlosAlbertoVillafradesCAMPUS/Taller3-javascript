@@ -8,19 +8,12 @@
 }
 .sectio1 {
     background-color:rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 2px 1px #72BAEC;
 }
-.animation{
-    border: 4px #72BAEC dashed;
-}
-@keyframes girar {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+  .cont-img{
+    border: 0.35rem #72BAEC dashed;
   }
-h1{
+.title{
     font-size: 5em;
     padding: 1px;
     font-family: "Campus";
